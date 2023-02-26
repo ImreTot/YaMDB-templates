@@ -1,7 +1,8 @@
 from django.contrib.auth import get_user_model
+from django.core.cache import cache
 from django.test import Client, TestCase
 from django.urls import reverse
-from django.core.cache import cache
+
 from ..models import Post
 
 User = get_user_model()
@@ -34,4 +35,3 @@ class CacheTests(TestCase):
         cache.clear()
         fifth_response = self.guest_client.get(reverse('posts:index'))
         self.assertNotEqual(fifth_response.content, fourth_response.content)
-

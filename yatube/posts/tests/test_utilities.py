@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
+from django.core.cache import cache
 from django.test import Client, TestCase
 from django.urls import reverse
-from django.core.cache import cache
 
 from ..models import Group, Post
 
