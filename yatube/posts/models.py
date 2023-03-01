@@ -24,7 +24,7 @@ class Post(CreatedModel):
                               blank=True)
 
     class Meta:
-        ordering = ['-pub_date']
+        ordering = ('-pub_date',)
         verbose_name = 'Пост'
         verbose_name_plural = 'Посты'
 
@@ -39,6 +39,11 @@ class Group(models.Model):
 
     def __str__(self):
         return self.title
+
+    class Meta:
+        indexes = [
+            models.Index(fields=['slug'], name='slug_idx'),
+        ]
 
 
 class Comment(CreatedModel):
@@ -59,3 +64,9 @@ class Follow(models.Model):
     author = models.ForeignKey(User,
                                related_name='following',
                                on_delete=models.CASCADE)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['user', 'author'],
+                                    name='unique_subscription')
+        ]

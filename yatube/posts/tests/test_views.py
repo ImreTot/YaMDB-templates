@@ -223,7 +223,7 @@ class PostsPagesTests(TestCase):
         self.assertIn(second_post, response.context['page_obj'])
 
     def test_profile_unfollow_create_subscription(self):
-        """View-функиция profile_unfollow
+        """View-функция profile_unfollow
         удаляет подписку на выбранного автора."""
         following_author = User.objects.create_user(username='Second')
         second_post = Post.objects.create(
